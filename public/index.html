@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DXF Viewer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside id="sidebar">
+        <h2>DXF Files</h2>
+        <ul id="file-list"></ul>
+      </aside>
+      <main id="viewer">
+        <canvas id="dxf-canvas"></canvas>
+        <div id="overlay">
+          <h2>DXF File Data</h2>
+          <pre id="file-content">Select a file to view its details.</pre>
+        </div>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
