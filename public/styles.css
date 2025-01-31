@@ -76,7 +76,7 @@ body {
   border-radius: 8px;
   z-index: 2;
   text-align: left;
-  min-width: 95%;
+  min-width: 80%;
   max-height: 95%;
   overflow: auto;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
