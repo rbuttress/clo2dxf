@@ -72,12 +72,13 @@ body {
   position: relative;
   background: rgba(0, 0, 0, 0.1);
   color: black;
-  padding: 20px;
+  padding: 40px;
   border-radius: 8px;
   z-index: 2;
   text-align: left;
-  min-width: 80%;
-  max-height: 95%;
+  min-width: 100%;
+  max-height: 100%;
+  min-height: 100%;
   overflow: auto;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
@@ -87,6 +88,23 @@ body {
   word-wrap: break-word;
   max-height: 100%;
   overflow-y: auto;
+}
+
+#save-button {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+#save-button:hover {
+  background-color: #0056b3;
 }
 
 /* Responsive Design */

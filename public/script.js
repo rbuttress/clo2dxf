@@ -79,9 +79,17 @@ document.addEventListener( "DOMContentLoaded", function () {
         return response.json();
       } )
       .then( ( data ) => {
+        // Apply filtering logic
+        data.blocks = Object.fromEntries(
+          Object.entries( data.blocks ).map( ( [key, value] ) => {
+            value.entities = value.entities.filter( ( entity ) => entity.type === "POLYLINE" );
+            return [key, value];
+          } )
+        );
+
         currentData = data;
+        console.log( "Filtered DXF Data:", currentData ); // Debug: Log the filtered data
         viewer.textContent = JSON.stringify( data, null, 2 );
-        console.log( "DXF Data:", data ); // Debug: Log the DXF data
         drawDXF( data );
       } )
       .catch( ( error ) => {
@@ -89,6 +97,39 @@ document.addEventListener( "DOMContentLoaded", function () {
         viewer.textContent = `Error loading file: ${error.message}`;
       } );
   }
+
+  // Add event listener for the save button
+  document.getElementById( 'save-button' ).addEventListener( 'click', () => {
+    if ( !currentData ) {
+      alert( "No DXF file loaded!" );
+      return;
+    }
+
+    // Send the filtered data to the server
+    fetch( '/save-dxf', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify( { data: currentData } ),
+    } )
+      .then( ( response ) => response.blob() ) // Get the response as a Blob
+      .then( ( blob ) => {
+        // Create a download link
+        const link = document.createElement( "a" );
+        link.href = URL.createObjectURL( blob );
+        link.download = "filtered.dxf"; // Default file name
+        link.click(); // Trigger the file system save dialog
+        URL.revokeObjectURL( link.href ); // Clean up
+      } )
+      .catch( ( error ) => {
+        console.error( "Error saving DXF file:", error );
+        alert( "Error saving DXF file" );
+      } );
+  } );
+
+
+
   function calculateBoundingBox( data ) {
     let minX = Infinity;
     let minY = Infinity;

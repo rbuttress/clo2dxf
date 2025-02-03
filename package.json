@@ -10,6 +10,7 @@
     "cors": "^2.8.5",
     "dxf-parser": "^1.1.2",
     "dxf-viewer": "^1.0.40",
+    "dxf-writer": "^1.18.4",
     "express": "^4.18.2"
   },
   "engines": {
